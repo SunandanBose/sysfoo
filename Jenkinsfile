@@ -1,8 +1,14 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'maven:3.6.3-jdk-11-slim'
+    }
+
+  }
   stages {
     stage('build') {
       steps {
+        sh 'mvn -version'
         sh 'mvn compile'
       }
     }
@@ -20,8 +26,5 @@ pipeline {
       }
     }
 
-  }
-  tools {
-    maven 'maven-3.8.1'
   }
 }
